@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=0.41, maximum-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+  <title>Fruit Ninja</title>
+</head>
+<body>
+  <nav class="sticky navbar navbar-expand-lg navbar-light bg-light">
+    <a class="icon-link navbar-brand" href="#"><img alt="home icon" class="icon" src="img/home.png" width="100" height="100"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navigation collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li id="first-elem" class="nav-item">
+          <a class="nav-link" href="#sec1">Objective</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec2">Introduction</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Design & Testing
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#sec3-1">Game Controlling Logic</a>
+            <a class="dropdown-item" href="#sec3-2">OpenCV Logic</a>
+            <a class="dropdown-item" href="#sec3-3">Integration</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec4">Result</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec5">Conclusion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec6">Future Work</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec7">Budget</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec8">Contributions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec9">References</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sec10">Code Appendix</a>
+        </li>
+       </ul>
+    </div>
+  </nav>
+  <div class="bg">
+  </div>
+
+  <div id="sec1" class="section odd">
+    <h3 class="title">Objective</h3><br>      
+    <p class="text">
+      Fruit Ninja is a classic and famous screen-touch game which caught people's love over several years.
+      Inspired by this fascinating game, I want to develop a motion controlled fruit ninja game.
+      Players can hold a "sword" in their hands and use it to "cut" the fruits in front of camera to get scores.
+    </p>
+    
+  </div>
+
+  <div id="sec2" class="section even">
+    <h3 class="title">Introduction</h3><br>
+    <p class="text">
+      The project consists of two main components: the Fruit Ninja game and the motion detection system.
+      The game is developed in pygame. Similar with Fruit Ninja, players need to cut fruits to get scores and avoid bomb to survive. In addition, players can choose either easy mode or hard mode to play.
+      Player can choose to play the game on the piTFT touch-screen or use motion control. The game can be seen in fig. 1. 
+      The motion detection system is based on OpenCV. With pictures captured by Picamera, the motion detection algorithm will find the contour of red object in a frame, calculate the area of red object, find the biggest red object, and calcuate the center. 
+      Player use a red "sword" shown in Fig. 3 and the algorithm continuously tracks the center of red "sword" to track the motion of players. The motion detection window can be seen in fig. 4.
+
+    </p>
+
+    <div class="fig-cont">
+      <figure class="figure">
+        <img src="img/gameDisplay1.png" class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Game Display 1">
+        <figcaption class="figure-caption">Game display</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="img/gameDisplay2.png" class="img-border left-img smaller-img figure-img img-fluid rounded" alt="Game Display 2">
+        <figcaption class="figure-caption">Game display</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="img/sword.jpg" class="img-border left-img smaller-img figure-img img-fluid rounded" alt="Red Sword">
+        <figcaption class="figure-caption">red sword</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="img/cvDisplay.png" class="img-border smaller-img figure-img img-fluid rounded" alt="CV display">
+        <figcaption class="figure-caption">CV display</figcaption>
+      </figure>
+    </div>
+
+    <p class="text">
+      Overall, the two components are connected through multiprocessing.Manager.list().
+      Using multiprocessing, the game and motion detection system run in parallel. 
+      The motion detection system detect the position of "sword" and write the shared multiprocessing.Manager.list. By reading the shared list, the game set the position of mouse in pygame to control the game play.
+    </p>
+
+    <p class="text">
+      The project is set up with the Raspberry Pi 3B (Pi), picamera, and a monitor. The Raspberry Pi is connected to the picamera and the monitor is connected through the HDMI port.
+    </p>
+
+    <p class="text">
+      To run the system, you would type <code>python main.py</code> in the terminal.
+      Then you can move the "sword" in front of the camera to "cut" the game mode you want(easy or hard), or to "cut" the quit button to quit the game.
+      To run the touch-screen game on piTFT, you would type <code>python game_piTFT.py</code> on the RPi.
+    </p>
+  </div>
+  <div id="sec3-1" class="section odd">
+    <h3 class="title">Design & Testing: Fruit Ninja Game</h3><br>
+    <p class="text">
+      This section discusses the development of the Fruit Ninja Game of the project.
+      The design went through multiple iterations before reaching the finalized design.
+      All the features on the game were tested without the motion detection system at first to ensure that
+      they function properly. After integrating both the motion detection system and the Game,
+      I ensured that the motion detection system can properly control the game play.
+    </p>
+    <h6 class="subtitle">First Iteration</h6>
+    <p class="text">
+      In the first iteration, I use pygame to develop the Fruit Ninja game.
+      I initialize the screen using <code>draw_gamestart_screen</code> function, initialize the player's lives using <code>draw_lives</code> function and initialize the fruits
+      using <code>generate_random_fruits</code> function. I store the fruit data in the <code>data</code> map, which include the speed, position and
+      other information about the specific fruit. In the main loop, I check the information about the existing fruits in <code>data</code> and judge
+      whether this fruit will be thrown out or should be generated, then check whether the fruit is cut by the "sword" according to their positions and draw
+      the updated health points and scores. When the player's health point is less than zero, the game will be over and using <code>draw_gameover_screen</code> function will show the final scores.
+      The player can either choose start a new game or quit. The display of the first iteration can be seen in fig. 5 and fig. 6.
+    </p>
+
+    <h6 class="subtitle">Second Iteration</h6>
+    <p class="text">
+      After I finished the main part of game, I tried to add more features to the game.
+      Therefore, in the second iteration, I add a hard mode for this game, which will generate more bombs and harder to get scores.
+      What's more, I polish the start screen, add three virtual buttons in the start screen, which are easy mode(New Game), hard mode(Dojo) and quit.
+      In addition, I use GPIO on RPi to enable player to quit the game using physical button, which will be more
+      convenient.
+    </p>
+
+    <h6 class="subtitle">Final Iteration</h6>
+    <p class="text">
+      In the final iteration, I optimize the parameter of game. I carefully optimize the number, size and speed of fruits and bombs. I choose to run the game in 30 FPS, which makes the game run more smoothly and ensure better user experience.
+      I also polish the whole game including using high resolution picture and improving the UI interface. I download high resolution icon and fruit pictures from Internet. In the start screen, I add three rotated rings to each of the three virtual buttons, which makes it more visually fascinating.
+    </p>
+
+    <div class="figure-container">
+      <div class="left-div fig-cont">
+        <figure class="figure">
+        <img src="img/gameDisplay1.png"
+           class="smaller-img figure-img img-fluid rounded" alt="Classification results">
+        <figcaption class="figure-caption">Game display</figcaption>
+        </figure>
+        <figure class="figure">
+        <img src="img/gameDisplay2.png"
+           class="smaller-img figure-img img-fluid rounded" alt="Openpose timess">
+        <figcaption class="figure-caption">Game display</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <h6 class="subtitle">Issues</h6>
+    <p class="text">
+      The first challenge I met is the logic in the main loop. I need to update the speed and position of each fruit
+      and judge whether the fruit is cut by the "sword" from time to time. Whenever a bomb is cut, the player's health point should be decreased and whenever a fruit is cut the scores
+      should be increased. The different cases should match different treatments, which require careful thinking and programming.
+    </p>
+    <p>
+      The second issue I met is the problem of video initialization. When I tried to run the game on piTFT, it showed
+      the error "video system can not be initialized". Later I found I need to connect the RPi with the monitor first, and the
+      video system can be initialized successfully.
+    </p>
+  </div>
+
+  <!-- CV-->
+  <div id="sec3-2" class="section even">
+    <h3 class="title">Design & Testing: motion detection system</h3>
+    <p class="text">
+      This section discusses the development of the motion detection system of the project.
+      Because I want to develop a motion controlled game. I need to find a accurate and fast method to detect the motion of players.
+      Our design went through 3 versions before reaching the finalized design.
+    </p> 
+    <p class="text">
+      The first version uses OpenPose to detect the hand from the video stream and
+      segment it from the background. However, the inference in neural network is highly CPU-intensed.
+      It takes RPi 5 seconds to process one frame which is too slow for a game.
+    </p>
+    <p class="text">
+      The second version uses OpenCV to detect hands.
+      The first step is to detect hands from the video stream and segment it from the background. 
+      After detecting the hand, the contours of the hand are extracted using OpenCV. 
+      With this information, the fingers as well as the location of the tip of the pointer finger can be calculated. 
+      Therefore, I can get the location of the hand.
+      However, the hand detection system can only reach 10 FPS, while The game is running in 30 FPS. It is still too slow.
+    </p> 
+    <p class="text"> 
+      The final verison uses OpenCV to detect the red "sword".
+      I made a red "sword" shown in fig. 3. Players need to hold it when playing games. The first step is to detect the red object from the video stream.
+      After detecting the red object, the contours of the object are extracted and the area of the object are calculated using OpenCV. 
+      I assume there are no big red object in the background, therefore, the largest red object will be the sword.
+      With this information, I can get the location of sword.
+      It turns out the simplest is the best. It can reach 30 FPS and can find the position accurately.
+    </p>
+
+    <h3 class="subtitle">First Version - OpenPose</h3>
+    <p class="text ">
+      In the first version, I use a pre-existing neural network model to detect hand. After much searching, I found a model called OpenPose which was developed by
+      the Perceptual Computing Lab at Carnegie Mellon University.
+      <a target="_blank" href="https://github.com/CMU-Perceptual-Computing-Lab/openpose"> OpenPose </a> is a real-time multi-person estimation system, which was later
+      extended to work with hands and other body parts. Setting it up was
+      very simple and the results of the OpenPose model running on input
+      from the camera is shown below in fig. 6.
+    </p>
+    <div class="figure-container">
+      <div class="left-div fig-cont">
+        <figure class="figure">
+        <img src="img/openpose.png"
+           class="smaller-img figure-img img-fluid rounded" alt="Classification results">
+        <figcaption class="figure-caption">Classification Results
+        with OpenPose Model</figcaption>
+        </figure>
+      </div>
+
+      <div class="right-div fig-cont">
+        <figure class="figure">
+        <img src="img/openpose_times.PNG"
+           class="smaller-img figure-img img-fluid rounded" alt="Openpose timess">
+        <figcaption class="figure-caption">OpenPose Times</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="text">
+      As shown in fig.6, the model worked extremely well and is able
+      to detect all the key points on the hand. Key points in this context refer to the joints on the hand. While the model worked well, there was one critical
+      downside: the runtime. The model works
+      by taking an image as input and runs the image through the model
+      to get the outputs. For pictures or videos, this model works well but
+      for our real-time application, it was simply too slow. For 720p images,
+      running the image through the model took over 3 seconds. Even after I
+      reduced the resolution to 90p, I was still
+      unable to get the model to classify the camera data fast enough.
+      Running the model on a desktop with an AMD Ryzen 7 5800H CPU and NVIDIA RTX 3060 GPU running at an
+      overclocked 4.6 GHz, it took ~1.6 seconds to
+      run a frame through the forward pass. The times are shown in fig. 7. This meant that if I used this
+      model, I would have a throughput of less than 1 frame per second.
+      To increase the throughput, I would need to use CUDA acceleration. Considering that
+      the Raspberry Pi's CPU is much less powerful than an R7-5800H and that it
+      does not have a GPU, there was no possible way for us to
+      use OpenPose on the Pi. Thus, I scrapped this idea and moved
+      onto an implementations using OpenCV.
+    </p>
+    <h3 class="subtitle">Second Version - OpenCV: hands detetcion</h3>
+    <p class="text">
+      In the second version, I moved towards an OpenCV implementation. I used OpenCV to isolate the hand in the image, detected the contour of hands, and finally found the position.
+      
+      <h6 class="subtitle">Background Segmentation</h6>
+      I first needed to find a way to isolate the hand in the image.
+      I used OpenCV's built in background subtraction operators such as <code>cv2.BackgroundSubtractorMOG2</code>.
+      I ran into an issue quickly with these background segmentation operators.
+      By default, they take a running average of the images seen so far in the video to create the background. 
+      The background detector was able to detect a moving hand, but once the hand stopped moving, the hand slowly became a part of the background and disappeared.
+      After searching the Internet, I set the learning rate to 0 and the background
+      subtractor would not update. This allows us to easily detect the
+      hand, even when still, after setting up the background with a frame that does not include the hand.
+      After applying the background subtractor as well as some filtering and thresholding, the binarized image can be seen in fig. 10. 
+      As seen in the figure, there is no noise in the image which makes detecting contours extremely easy.
+    </p>
+    
+    <h6 class="subtitle">Contour Detection</h6>
+    <p class="text">
+      The next step is to find the contour of the hand and the arm if they are in
+      the image. The contour is simply the curve joining the set of points
+      making up the boundary of the object of interest. To find the contours of
+      any objects in the image, the OpenCV function <code>cv2.findContours</code> is used. Given a binary image as well as some other
+      parameters, it returns a list of contours as well as a list representing
+      the hierarchy of the contours (in case some contours are contained inside
+      others). Assuming the background is set correctly, the hand corresponds to 
+      the contour with the largest area which was easy to find in the list.
+    </p>
+
+    <div class="figure-container">
+      <div class="fig-cont">
+        <figure class="figure">
+        <img src="img/prompt.png"
+           class="img-border smaller-img figure-img img-fluid rounded" alt="background prompt">
+        <figcaption class="figure-caption">Prompt to Set Background</figcaption>
+        </figure>
+      </div>
+      <div class="fig-cont">
+        <figure class="figure">
+        <img src="img/binary_image.png"
+           class="img-border smaller-img figure-img img-fluid rounded" alt="binary image">
+        <figcaption class="figure-caption">Binary Image</figcaption>
+        </figure>
+      </div>
+    </div>
+    
+    <h6 class="subtitle">Adding a Bounding Box</h6>
+    <p class="text">
+    After finding the contour of the hand, I can get coordinate of the hands and use <code>cv2.rectangle</code> to add the bounding box to the hands.
+    </p>
+    <div class="fig-cont">
+      <figure class="figure">
+      <img src="img/boundingbox.png"
+         class="img-border right-img smaller-img figure-img img-fluid rounded" alt="bounding box">
+      <figcaption class="figure-caption">Bounding Box</figcaption>
+      </figure>
+    </div>
+    <h3 class="subtitle">Final Version - OpenCV: red object detection</h3>
+    <p class="text">
+      The detection of hand is not fast and accuate enough. It can only reach 10 FPS. And it may be affected by the lighting and get the wrong position of hands. 
+      So I decided to use colour detection. The player need to use a "sword" and the top of "sword" is in red as fig. 12. By detecting the red region, I can get the position of the sword.
+      Because this method is pretty simple, it can reach 30 FPS and detect the position accurately.
+    </p>
+    <h6 class="subtitle">Segment Out the Red Region</h6>
+    <p>I need to segment out a particular region or color from an image using <code>cv2.inRange</code>.
+      This method is naively equivalent to multiple thresholding where I assign a particular value to the region falling in between the two thresholds.
+      Remaining region is assigned a different value. 
+After that I can Then I use <code>cv2.bitwise_and</code> to combine the mask and original frame with bit wise operation and return a merging image like Fig. 14.
+Next, I can use <code>cv2.findContours</code>, <code>cv2.contourArea</code>, and <code>cv2.boundingRect</code> to get the largest red object in the frame. Finally, I successfully get the position
+of the largest object.
+    </p>
+
+    <div class="fig-cont">
+      <figure class="figure">
+      <img src="img/sword.jpg"
+         class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+      <figcaption class="figure-caption">original picture</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="img/mask.jpg"
+           class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+        <figcaption class="figure-caption">cv2.inRange result</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="img/frame2.jpg"
+             class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+          <figcaption class="figure-caption">cv2.bitwise_and result</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="img/box2.png"
+               class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+            <figcaption class="figure-caption">cv2.boundingRect result</figcaption>
+            </figure>
+    </div>
+    <h6 class="subtitle">Optimizations the Boundary </h6>
+    <p class="text">
+    The defination of cv2.inRange is as below:  
+  </p>
+  <p class="text"></p>
+    <code>cv2.inRange(src, lowerb, upperb)</code> 
+  </p> 
+  <p class="text"></p>     
+    If I change the lower boundary and upper boundary of cv2.inRange, the result will change. I use six colours to get the boundary that can only detect red object like Fig. 16.
+    <div class="fig-cont">
+      <figure class="figure">
+      <img src="img/frame00.jpg"
+         class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+      <figcaption class="figure-caption">original picture</figcaption>
+      </figure>
+    </div>
+    I first set the lower_boundary=np.array([0,180,180]), upper_boundary=np.array([50,255,255]). The result is shown in Fig. 17, Fig. 18. From the result I can find the
+    red, orange, and yellow region are segmented out. Therefore, the boundary is not good enough.
+    <div class="fig-cont">
+      <figure class="figure">
+        <img src="img/mask11.jpg"
+           class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+        <figcaption class="figure-caption">cv2.inRange result</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="img/new11.jpg"
+             class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+          <figcaption class="figure-caption">cv2.bitwise_and result</figcaption>
+          </figure>
+    </div>
+
+  </p>
+  <p>
+    After the careful experiment, I find if I set lower_boundary=np.array([0,180,180]),upper_boundary=np.array([5,255,255]). We can only segment out the red region which satisfy our requirement.
+    </p>
+
+    <div class="fig-cont">
+      <figure class="figure">
+        <img src="img/mask00.jpg"
+           class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+        <figcaption class="figure-caption">cv2.inRange result</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="img/new00.jpg"
+             class="img-border right-img smaller-img figure-img img-fluid rounded" alt="Boxing box">
+          <figcaption class="figure-caption">cv2.bitwise_and result</figcaption>
+          </figure>
+    </div>
+
+    <h6 class="subtitle">Testing Details</h6>
+    <p class="text">
+     Given the nature of the program, most of the testing could be done
+      visually. By running the program and looking at the OpenCV output, it
+      was easy to test whether certain methods worked properly. When
+      implementing new features, testing was mostly done on the desktop. This
+      was done only for convenience as the program runs much faster on the
+      desktop, allowing us to test features much faster. I used the
+      OpenCV output frame for most of the testing. For example, I drew
+      lines on the output frame to test how well the system was
+      detecting the red object. This also allowed us to test how environment
+      conditions such as external lighting would affect detection. Testing the speed of the pipeline was done on the Pi since I had to optimize for
+      performance on the Pi.
+    </p>
+
+  </div>
+
+
+  <!-- integration-->
+  <div id="sec3-3" class="section odd">
+    <h3 class="title">Design & Testing: Integration</h3>
+    <p class="text">
+      After the game and motion detection system were developed to a stable state, I combined the two components to create the final system. In this section, I will discuss the final system as well as issues I ran into while finalizing the system.
+    </p>
+    <h6 class="subtitle">Final System</h6>
+    <p class="text">
+      The final system has both the game window and motion detection window running concurrently. The CV window allows users to know where the sword are relative to the camera frame and 
+      makes it easier for the user to use their hands to manipulate the game. This is necessary since there aren't enough multiple cameras to cover a large field of view, 
+      so users will run into the issue of moving their hands out of frame if they cannot see their hand location in reference to the camera frame. 
+      Fig. 1 and fig. 4 would be what users see when running the main program. As noted in the <a href=#sec2>Introduction</a>, 
+    </p>
+    
+    <p class="text">
+      The multiprocessing library is used to run the two programs as separate processes since both the motion detection window and game run in a infinite loop. 
+      The data from the motion detection is sent from the CV component to the pygame through a <code>multiprocessing.Manager.list()</code>. 
+      The CV component would send data in the form of <code>[x,y]</code>, where <code>[x,y]</code> represents a coordinate>.
+      In order to use motion to control the game, the user needs to hold the sword and use sword to "cut" the fruit. 
+      The location of the sword is detected and used as the mouse position in pygame to control the game. 
+      If the location of the sword is on a fruit, player will gain a point.
+      If the location of the sword is on a bomb, player will lose health points. 
+    </p>
+    
+  </div>
+
+
+  <div id="sec4" class="section even">
+    <h3 class="title">Results</h3><br>
+    <p class="text">
+
+      The project performed mostly as planned. 
+      I was able to implement all the features I planned for. The system functioned properly both on the monitor and the piTFT.
+      The main objective, to allow players to play a motion controlled Fruit Ninja game, has been achieved.
+    </p>
+  </div>
+
+  <div id="sec5" class="section odd">
+    <h3 class="title">Conclusions</h3><br>
+    <p class="text">
+      The project was able to successfully read input from a camera, detect the user's motion, and control the Fruit Ninja game play based on player's motion.
+      I also added a hard mode to provide user more challenging but rewarding experience.
+      Thus, I met all our project objectives. During this process, I discovered certain things that didn't work.
+      
+      On the motion detection system, I have tried several methods. First I tried to use a pre-existing neural network model - OpenPose to detect hand. However, it took RPi 5 seconds to process a frame which is
+      too slow for the game. Then I tried OpenCV to detect the hands. However, it can only reach 10 FPS and is not accurate. Finally, I made a red sword and chose to detect the red sword to detect the motion. It can reach 30 FPS and is highly accurate.
+      During integration, I found that I had to use picamera instead of webcamera to avoid system crash. Also I need to slow down parts of the program, specifically the motion detection system, due to the slower core clock of the Pi's CPU.
+      
+    </p>
+    <p class="text">Apart from these issues, I am happy with the outcome with our project and learned a lot about working with the Pi</p>
+  </div>
+
+  <div id="sec6" class="section even">
+    <h3 class="title">Future Work</h3><br>
+    <p class="text">
+      Given more time for the project, I would like to add more feature to the game. For example, I can add the sound
+      effect to the game and make more rendering to the interface, like the cutting effects.
+      What's more, I can also optimize the speed and improve fluency of the game.
+      Also, I can improve the performance of motion detection system by improving the detection speed and accuracy.
+    </p>
+  </div>
+
+  <div id="sec8" class="section even">
+    <h3 class="title">Contributions</h3><br>
+
+    <div class="people">
+
+      <div class="portrait-container">
+        <img src="img/Qingfan.png" class="left-img portrait" alt="Qingfan">
+        <div class="middle">
+          <div class="portrait-text">
+            <a href="mailto: qy237@cornell.edu">Qingfan Yang</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="sec9" class="section odd">
+    <h3 class="title">References</h3><br>
+    <p class="text">
+      I referenced the <a target="_blank" href="https://www.pygame.org/wiki/tutorials"> pygame tutorials </a>
+    to design the game using the pygame library.
+    </p>
+    <p class="text"></p>
+    For motion detection system, I researched various methods. I looked into a
+      neural network model called <a target="_blank" href="https://github.com/CMU-Perceptual-Computing-Lab/openpose">OpenPose</a> created by CMU.
+      For the idea of using a skin histogram, I referenced a tutorial called
+      <a target="_blank" href="https://nalinc.github.io/blog/2018/skin-detection-python-opencv/">Skin Detection Using OpenCV.</a>
+      When attempting manual thresholding for background segmentation, I
+      referenced a software written using OpenCV in C++ called
+      <a target="_blank" href="https://medium.com/@soffritti.pierfrancesco/handy-hands-detection-with-opencv-ac6e9fb3cec1"> Handy, hand detection with OpenCV</a>.
+      For help with contour and defect detection, I referenced both the
+      previous tutorial and a tutorial called
+      <a target="_blank" href="https://becominghuman.ai/real-time-finger-detection-1e18fea0d1d4">Real-time Finger Detection</a>.
+      For improving performance of the CV pipeline on the Pi, I
+      referenced the tutorial
+      <a target="_blank" href="https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/">Increasing Raspberry Pi FPS with Python and OpenCV.</a>
+    </p>
+  </div>
+
+  <div id="sec10" class="section even">
+    <h3 class="title">Code Appendix</h3><br>
+    <p class="text">
+      The code is located at the public Github <a target="_blank" href="https://github.com/Angus-F/FruitNinja"> repository</a>.
+    </p>
+  </div>
+
+</body>
+
+
+</html>
+
